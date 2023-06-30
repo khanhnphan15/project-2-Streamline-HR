@@ -17,7 +17,7 @@ async function create(req, res){
 		//   What talks to the Movies in the database? MovieModel
 		// What method on the movieModel can find something by an id? findById
 	  // What variable is the Contents of the form? req.body <- represent a Review
-
+	console.log(req.body)
 	try {
 
 		const movieFromTheDb = await MovieModel.findById(req.params.id)
