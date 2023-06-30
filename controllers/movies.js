@@ -9,7 +9,8 @@ module.exports = {
 
 async function index(req, res) {
   const movies = await MovieModel.find({});
-  res.render('movies/index', { title: 'All Movies', movies });
+  console.log(movies)
+  res.render('movies/index', { title: 'All Movies', movies:movies });
 
 
 
