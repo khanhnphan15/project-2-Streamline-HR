@@ -56,3 +56,35 @@
   <h5>No Reviews Yet</h5>
 <% } %>
 <%- include('../partials/footer') %>
+
+<!-- This is what the movie variable may look like
+you can always confirm by loggin the variable you're putting into 
+render in the controller function that rendering show.ejs (show)
+
+{
+  _id: new ObjectId("649edbca3f6686d2674dccf9"),
+  title: 'CaddyShack',
+  releaseYear: 1998,
+  mpaaRating: 'G',
+  cast: [ 'Tom Hanks', 'Gary Sinise' ],
+  nowShowing: true,
+  createdAt: 2023-06-30T13:42:34.444Z,
+  updatedAt: 2023-06-30T16:15:55.236Z,
+  __v: 2,
+  reviews: [
+    {
+      content: 'Good movieeeeee',
+      rating: 5,
+      _id: new ObjectId("649efe9056f76ec10bdd6a35"),
+      createdAt: 2023-06-30T16:10:56.299Z,
+      updatedAt: 2023-06-30T16:10:56.299Z
+    },
+    {
+      content: 'Bad Moviee',
+      rating: 1,
+      _id: new ObjectId("649effbb80d16d4c6a8f7b88"),
+      createdAt: 2023-06-30T16:15:55.235Z,
+      updatedAt: 2023-06-30T16:15:55.235Z
+    }
+  ]
+} -->
