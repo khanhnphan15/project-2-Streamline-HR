@@ -36,6 +36,7 @@ async function show(req, res) {
     res.render("movies/show", {
       title: "Movie Detail",
       movie: movieFromTheDatabase,
+      performers: performersFromTheDatabase
     });
   } catch (err) {
     res.send(err);

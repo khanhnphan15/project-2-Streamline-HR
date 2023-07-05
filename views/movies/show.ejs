@@ -10,8 +10,18 @@
   <div>Now Showing: </div>
   <div><%= movie.nowShowing ? 'Yes' : 'Nope' %></div>
 </section>
- 
 
+<br/>
+<form id="add-per-to-cast" action="/movies/<%= movie._id %>/performers" method="POST">
+  <select name="performerId">
+    <!-- Emit an option for each performer -->
+    
+    <% performers.forEach(performer => { %>
+     <option value="<%= performer._id %>"><%= performer.name %></option>
+    <% }) %>
+  </select>
+  <button type="submit">Add to Cast</button>
+</form>
 
 <!-- new markup below -->
 <br><br><h2>Reviews</h2>
