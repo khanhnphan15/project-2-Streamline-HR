@@ -28,6 +28,10 @@ const reviewSchema = new Schema({
 
 
 // ONE MOVIE
+
+// SCHEMA Defines what structure/shape 
+// that the documents created from the Movie Model
+// that our stored in the database should look like
 const movieSchema = new mongoose.Schema({
   title: { type: String, required: true },
   releaseYear: {
@@ -43,7 +47,6 @@ const movieSchema = new mongoose.Schema({
     type: String,
     enum: ['G', 'PG', 'PG-13', 'R']
   },
-  cast: [String],
   nowShowing: { type: Boolean, default: true }
 }, {
   timestamps: true
