@@ -1,37 +1,51 @@
-const MovieModel = require('../models/movie');
+const MovieModel = require("../models/movie");
+const PerformerModel = require("../models/performer");
 
 module.exports = {
   index,
   show,
   new: newMovie,
-  create
+  create,
 };
 
 async function index(req, res) {
   const movies = await MovieModel.find({});
-  console.log(movies)
-  res.render('movies/index', { title: 'All Movies', movies:movies });
-
-
-
-
+  console.log(movies);
+  res.render("movies/index", { title: "All Movies", movies: movies });
 
   // MovieModel.find({}, function(err, movies){
   //   res.render('movies/index', { title: 'All Movies', movies });
   // })
-
- 
 }
 
 async function show(req, res) {
-  const movie = await MovieModel.findById(req.params.id);
-  res.render('movies/show', { title: 'Movie Detail', movie });
+  try {
+    const movieFromTheDatabase = await MovieModel.findById(req.params.id);
+
+    console.log(movieFromTheDatabase);
+
+    // Find all of the Performers that our not in the movieFromTheDatabase.cast array
+    // {$nin: movieFromTheDatabase.cast} find all the performers NOT IN the movieFromTheDatabase.cast array
+    // Mongoose/mongodb query
+
+    // These are the performers for the drop down menu
+    const performersFromTheDatabase = await PerformerModel.find({
+      _id: { $nin: movieFromTheDatabase.cast },
+    });
+
+    res.render("movies/show", {
+      title: "Movie Detail",
+      movie: movieFromTheDatabase,
+    });
+  } catch (err) {
+    res.send(err);
+  }
 }
 
 function newMovie(req, res) {
-  // We'll want to be able to render an  
+  // We'll want to be able to render an
   // errorMsg if the create action fails
-  res.render('movies/new', { title: 'Add Movie', errorMsg: '' });
+  res.render("movies/new", { title: "Add Movie", errorMsg: "" });
 }
 
 async function create(req, res) {
@@ -42,23 +56,21 @@ async function create(req, res) {
 
   // Remove empty properties so that defaults will be applied
   for (let key in req.body) {
-    if (req.body[key] === '') delete req.body[key];
+    if (req.body[key] === "") delete req.body[key];
   }
   try {
-
-
-    const movieFromTheDatabase =  await MovieModel.create(req.body);// the await is waiting for the MovieModel to go to MongoDB ATLAS (our db) a
-    //and put the contents form in the db, and come to the express server
+    const movieFromTheDatabase = await MovieModel.create(req.body); // the await is waiting for the MovieModel to go to MongoDB ATLAS (our db) a
+    //and put the contents form in the db, and come back to the express server
 
     // if you want to see what you put in the database on your server
-    console.log(movieFromTheDatabase)
+    console.log(movieFromTheDatabase);
 
     // Always redirect after CUDing data
     // We'll refactor to redirect to the movies index after we implement it
-    res.redirect('/movies');  // Update this line
+    res.redirect(`/movies/${movieFromTheDatabase._id}`); // Update this line
   } catch (err) {
     // Typically some sort of validation error
     console.log(err);
-    res.render('movies/new', { errorMsg: err.message });
+    res.render("movies/new", { errorMsg: err.message });
   }
 }

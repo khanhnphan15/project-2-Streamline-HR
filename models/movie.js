@@ -41,8 +41,11 @@ const movieSchema = new mongoose.Schema({
     },
     min: 1927
   },
+  // Cast is an array of Id's that reference the Performer model
+  // Many to Many Relationship
+  cast: [{type: mongoose.Schema.Types.ObjectId, ref: 'Performer'}],
   // This creates a one (Movie) has many (Reviews) relationship
-  reviews: [reviewSchema],
+  reviews: [reviewSchema],// using embedding to create the relationship
   mpaaRating: {
     type: String,
     enum: ['G', 'PG', 'PG-13', 'R']
