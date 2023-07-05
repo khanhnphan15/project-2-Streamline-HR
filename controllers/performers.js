@@ -4,7 +4,33 @@ const Movie = require("../models/movie");
 module.exports = {
   new: newPerformer,
   create,
+  addToCast
 };
+
+async function addToCast(req, res){
+  // Add the performer from the drop down to the movies.cast array. 
+
+  // Find the movie from the database! req.params.id
+  try {
+    // go to the database and find the movie with id from the params
+    const movieFromTheDatabase = await Movie.findById(req.params.id);
+
+    // Add the contents of the form (performers id) to the movieFromTheDatabase
+    // associating a performer with the movie
+    movieFromTheDatabase.cast.push(req.body.performerId)
+    // mutate a document
+    // we need to tell the database
+    await movieFromTheDatabase.save()
+    
+    // respond to the client!
+    res.redirect(`/movies/${req.params.id}`)
+
+  } catch(err){
+    res.send(err)
+  }
+
+
+}
 
 async function create(req, res) {
   // Need to "fix" date formatting to prevent day off by 1
