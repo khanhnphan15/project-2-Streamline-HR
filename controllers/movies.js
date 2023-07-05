@@ -20,7 +20,15 @@ async function index(req, res) {
 
 async function show(req, res) {
   try {
-    const movieFromTheDatabase = await MovieModel.findById(req.params.id);
+
+    // find the movie and populate the performer documents in the movies.cast array
+    // that way we have the whole object instead of just id's
+    const movieFromTheDatabase = await MovieModel
+                                   .findById(req.params.id)
+                                   .populate('cast') //  'cast' is the property name on the movie schema that has ref: 'Performer'
+                                   .exec();
+
+                                  
 
     console.log(movieFromTheDatabase);
 

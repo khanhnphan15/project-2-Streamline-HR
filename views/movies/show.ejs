@@ -7,6 +7,12 @@
   <div><%= movie.releaseYear %></div>
   <div>Rating: </div>
   <div><%= movie.mpaaRating %></div>
+  <div>Cast:</div>
+  <ul>
+    <% movie.cast.forEach(performer => { %>
+     <li><%= performer.name %>  <small><%= performer.born.toLocaleDateString() %></small></li>
+    <% }) %>
+  </ul>
   <div>Now Showing: </div>
   <div><%= movie.nowShowing ? 'Yes' : 'Nope' %></div>
 </section>
