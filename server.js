@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
 
 require('dotenv').config();
 // connect to the database with AFTER the config consts are processed
@@ -24,6 +25,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
