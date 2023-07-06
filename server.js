@@ -4,10 +4,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const passport = require('passport');
 
 require('dotenv').config();
 // connect to the database with AFTER the config consts are processed
 require('./config/database');
+// make sure you require you passport strategy files
+require('./config/passport')
 
 const indexRouter = require('./routes/index');
 const moviesRouter = require('./routes/movies');
@@ -22,15 +25,24 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); // defines req.body for us (javascript http request (unit 3))
+app.use(express.urlencoded({ extended: false }));  // defines req.body for us! (form)
 app.use(cookieParser());
 
+
+// this creates the cookie with sid that remembers the browser that is making the http requests
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true
 }))
+
+// ALWAYS SETUP PASSPORT AFTER YOUR SESSION, because PASSPORT USES The cookie you make with the session
+app.use(passport.initialize());
+app.use(passport.session());
+
+// and before the controllers ^^^^^^^ because the controllers want access to req.user! Passport defines req.user for us!
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
