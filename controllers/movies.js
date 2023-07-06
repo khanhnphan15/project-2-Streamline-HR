@@ -19,6 +19,8 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
+  console.log(req.user)
+
   try {
 
     // find the movie and populate the performer documents in the movies.cast array
@@ -42,7 +44,6 @@ async function show(req, res) {
     });
 
     res.render("movies/show", {
-      title: "Movie Detail",
       movie: movieFromTheDatabase,
       performers: performersFromTheDatabase
     });
