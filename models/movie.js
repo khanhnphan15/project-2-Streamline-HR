@@ -19,7 +19,11 @@ const reviewSchema = new Schema({
     min: 1,
     max: 5,
     default: 5
-  }
+  },
+  // 1 to many, A review belongs to a User!
+  user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+  userName: String,
+  userAvatar: String
 }, {
   timestamps: true
 });

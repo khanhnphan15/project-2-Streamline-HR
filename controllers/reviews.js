@@ -23,6 +23,13 @@ async function create(req, res){
 		const movieFromTheDb = await MovieModel.findById(req.params.id)
 		// I could check my code make sure I'm finding the movie
 		
+		// Add the logged in user properties to req.body!
+		req.body.user = req.user._id
+		req.body.userName = req.user.name;
+		req.body.userAvatar = req.user.avatar;
+		
+
+
 		// add the review (req.body) to the movie (movieFromTheDb) we found from the db
 		movieFromTheDb.reviews.push(req.body);
 		// since I changed a document (movieFromTheDb) (I mutated it)
