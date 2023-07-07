@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const methodOverride = require('method-override');
+
 
 require('dotenv').config();
 // connect to the database with AFTER the config consts are processed
@@ -28,7 +30,7 @@ app.use(logger('dev'));
 app.use(express.json()); // defines req.body for us (javascript http request (unit 3))
 app.use(express.urlencoded({ extended: false }));  // defines req.body for us! (form)
 app.use(cookieParser());
-
+app.use(methodOverride('_method'));
 
 // this creates the cookie with sid that remembers the browser that is making the http requests
 app.use(session({
