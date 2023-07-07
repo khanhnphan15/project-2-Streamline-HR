@@ -71,6 +71,7 @@
           <table>
             <thead>
               <tr>
+                <th>User</th>
                 <th>Date</th>
                 <th>Review</th>
                 <th>Rating</th>
@@ -79,6 +80,8 @@
             <tbody>
               <% movie.reviews.forEach(function(r) { %>
                 <tr>
+                  <td class="review-user"><img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" ><%= r.userName %></td>
+                  <td><%= r.createdAt.toLocaleDateString() %></td>
                   <td>
                     <%= r.createdAt.toLocaleDateString() %>
                   </td>
