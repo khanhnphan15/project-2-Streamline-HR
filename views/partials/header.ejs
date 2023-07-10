@@ -2,32 +2,30 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <title>
-   mongoose movies
-  </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <title>
+        Streamline HR
+    </title>
 </head>
-
 <body>
-  <nav>
-    <img src="/images/camera.svg">
 
-    <% if (user) { %>
-      <a href="/performers/new">ADD PERFORMER</a>
-      <a href="/movies/new">ADD MOVIE</a>
-      <a href="/logout">LOG OUT</a>
-      <% } else { %>
-        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-      <% } %>
+<nav class="navbar">
+    <img class="main-logo"
+         src="https://i0.wp.com/ednep.com/wp-content/uploads/2020/06/Employee-Management-System.png?w=860&amp;ssl=1"/>
 
+    <a href="/logout" class="log-out">
+        <svg style="height: 32px;width: 25px;" xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px"
+             height="800px" viewBox="0 0 52 52"
+             enable-background="new 0 0 52 52" xml:space="preserve">
+            <g>
+                <path d="M21,48.5v-3c0-0.8-0.7-1.5-1.5-1.5h-10C8.7,44,8,43.3,8,42.5v-33C8,8.7,8.7,8,9.5,8h10   C20.3,8,21,7.3,21,6.5v-3C21,2.7,20.3,2,19.5,2H6C3.8,2,2,3.8,2,6v40c0,2.2,1.8,4,4,4h13.5C20.3,50,21,49.3,21,48.5z"/>
+                <path d="M49.6,27c0.6-0.6,0.6-1.5,0-2.1L36.1,11.4c-0.6-0.6-1.5-0.6-2.1,0l-2.1,2.1c-0.6,0.6-0.6,1.5,0,2.1l5.6,5.6   c0.6,0.6,0.2,1.7-0.7,1.7H15.5c-0.8,0-1.5,0.6-1.5,1.4v3c0,0.8,0.7,1.6,1.5,1.6h21.2c0.9,0,1.3,1.1,0.7,1.7l-5.6,5.6   c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0L49.6,27z"/>
+            </g>
+    </svg>
+    </a>
+</nav>
 
-      <a href="/movies">ALL MOVIES</a>
-
-  </nav>
-  <main>
-    <h1>
-  
-    </h1>
+</body>

@@ -1,0 +1,191 @@
+<%- include('../partials/header') %>
+<body>
+
+<style type="text/css">
+
+
+</style>
+
+<%- include('../partials/employee-modal') %>
+
+<nav class='leftNav'>
+    <div class="employeeDetail">
+        <h2>Full Detail</h2>
+        <img src='https://media.licdn.com/dms/image/C4D03AQFsUiQ7K7d8Eg/profile-displayphoto-shrink_200_200/0/1597245962129?e=1694649600&v=beta&t=uqK6zUdbQiT3RXe4D4d1IfYFHboelS27TwJikBeGxq4' />
+        <h3>Jenny Yoo</h3>
+        <p>jenny@yahoo.com</p>
+        <p>770-466-7431</p>
+        <p>CEO</p>
+        <p class='date'>02/15/1987</p>
+    </div>
+</nav>
+
+<main class="mainContainer">
+    <div class="mainWrapper">
+        <h1>
+            Total Employees:  <span class="employee-count"><%=employees.length%></span>
+        </h1>
+        <div class="employee-header">
+            <div class="search-container">
+                <input type="text" placeholder="Search by name, email..." onChange={}/>
+            </div>
+            <button class="add-btn" id="add-employee-button">Add Employee</button>
+        </div>
+        <div class="employees">
+        </div>
+        <div class="grid-container">
+            <% employees.forEach((e) => { %>
+                <div class="employee-panel">
+                    <div class="panel-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 24" fill="currentColor" width="24" height="15">
+                            <circle cx="12" cy="5" r="2" />
+                            <circle cx="12" cy="12" r="2" />
+                            <circle cx="12" cy="19" r="2" />
+                        </svg>
+                    </div>
+
+                    <div class="profileImage">
+                        <img src='https://media.licdn.com/dms/image/C4D03AQFsUiQ7K7d8Eg/profile-displayphoto-shrink_200_200/0/1597245962129?e=1694649600&v=beta&t=uqK6zUdbQiT3RXe4D4d1IfYFHboelS27TwJikBeGxq4' />
+                    </div>
+                    <div class="employee-detail">
+                        <h6 class="employee-name">Jenny Yoo</h6>
+                        <p class="employee-email">jenny@yahoo.com</p>
+                    </div>
+                    <div class="position-role">
+                        <p>CEO</p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</main>
+<script type="text/javascript">
+
+    const addEmployeeButton = document.getElementById('add-employee-button');
+    const closeAddEmployeeButton = document.getElementById('close-add-employee-modal');
+    const addEmployeeModalSaveButton = document.getElementById('add-employee-save-button');
+
+    const addEmployeeModal = document.getElementById('add-employee-modal');
+    const employeeFirstNameModal = document.getElementById(('employee-first-name'));
+    const employeeLastNameModal = document.getElementById(('employee-last-name'));
+    const employeeDobModal = document.getElementById('employee-dob');
+    const employeeEmailModal = document.getElementById(('employee-email'));
+    const employeePhoneModal = document.getElementById('employee-phone');
+    const employeeJobPositionModal = document.getElementById(('employee-job-position'));
+    const employeeDateOfHireModal = document.getElementById('employee-date-of-hire');
+
+    class FormInput {
+        name;
+        input;
+        validators;
+        isValid = true;
+        errors = [];
+
+        constructor(args) {
+            this.name = args.name;
+            this.input = args.input;
+            this.validators = args.validators;
+        }
+    }
+
+    let inputs = [
+        new FormInput({
+            name: 'First Name',
+            input: employeeFirstNameModal,
+            validators: ['populated'],
+        }),
+        new FormInput({
+            name: 'Last Name',
+            input: employeeLastNameModal,
+            validators: ['populated'],
+        }),
+        new FormInput({
+            name: 'Dob',
+            input: employeeDobModal,
+            validators: ['populated'],
+        }),
+        new FormInput({
+            name: 'Email',
+            input: employeeEmailModal,
+            validators: ['populated'],
+        }),
+        new FormInput({
+            name: 'Phone',
+            input: employeePhoneModal,
+            validators: ['populated'],
+        }),
+        new FormInput({
+            name: 'Job Position',
+            input: employeeJobPositionModal,
+            validators: ['populated'],
+        }),
+        new FormInput({
+            name: 'Date of Hire',
+            input: employeeDateOfHireModal,
+            validators: ['populated'],
+        }),
+    ]
+
+    addEmployeeButton.addEventListener('click', (btn) => {
+        addEmployeeModal.classList.add('show');
+    });
+    closeAddEmployeeButton.addEventListener('click', (btn) => {
+        addEmployeeModal.classList.remove('show');
+    });
+    addEmployeeModalSaveButton.addEventListener('click', (btn) => {
+        let isValid = validateForm();
+        if (isValid) {
+            // post the form
+        } else {
+            for (let i of inputs) {
+                if (i.isValid) {
+                    i.input.classList.remove('error');
+                    deleteErrorMessage(i);
+                } else {
+                    i.input.classList.add('error');
+                    let span = document.createElement('span');
+                    span.classList.add('validation-error');
+                    span.textContent = i.errors[0];
+                    deleteErrorMessage(i);
+                    i.input.parentNode.insertBefore(span, i.input.nextSibling);
+                }
+            }
+        }
+    });
+
+    function deleteErrorMessage(i) {
+        if (i.input.nextSibling.nodeName === 'SPAN' && i.input.nextSibling.classList.contains('validation-error')) {
+            i.input.parentNode.removeChild(i.input.nextSibling);
+        }
+    }
+
+    function validateForm() {
+        let formIsValid = true;
+        for (let i of inputs) {
+            for (let v of i.validators) {
+                switch (v) {
+                    case 'populated':
+                        let isValid = isPopulated(i.input);
+                        if (!isValid) {
+                            formIsValid = false;
+                            i.isValid = false;
+                            i.errors.push(`${i.name} must be populated`);
+                        } else {
+                            i.isValid = true;
+                        }
+                        break;
+
+                    default:
+                        throw new Error(`${v} is not a valid option in validateForm`);
+                }
+            }
+        }
+        return formIsValid;
+    }
+    function isPopulated(input) {
+        return !!input.value;
+    }
+</script>
+</body>
+
+<%- include('../partials/footer') %>
