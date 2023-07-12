@@ -112,6 +112,22 @@ body {
 }
 
 /*main section   */
+.leftNav, .mainContainer {
+    transition: all 500ms ease-in-out;
+}
+.page-wrapper.sidebar-closed .leftNav {
+    transform: translateX(-255px);
+}
+.page-wrapper.sidebar-closed .mainContainer {
+    margin-left: 0;
+}
+.page-wrapper.sidebar-open .leftNav {
+    transform: translateX(0);
+}
+.page-wrapper.sidebar-open .mainContainer {
+    margin-left: 16rem;
+}
+
 .mainContainer {
     margin-left: 16rem;
     background-color: #f7f6fb;
@@ -230,6 +246,7 @@ body {
     align-items: center;
     justify-content: end;
     padding: 10px;
+    position: relative;
 }
 
 .employee-panel .employee-detail .employee-name {
@@ -342,11 +359,11 @@ body {
 
 
 /*add employee btn*/
-#add-employee-modal {
+#add-employee-modal, #edit-employee-modal {
     display: none;
 }
 
-#add-employee-modal.show {
+#add-employee-modal.show, #edit-employee-modal.show {
     display: flex;
 }
 
@@ -484,4 +501,32 @@ label {
     border-radius: 6px;
     background-color: #577BFA;
     color: #fff;
+}
+
+/*dropdown-menu of three dot btn*/
+.dropdown-menu {
+    position: absolute;
+    top: 11px;
+    right: 17px;
+    width: 115px;
+    height: 63px;
+    background-color: white;
+    margin-top: 5px;
+    border-radius: 10px;
+    box-shadow: -1px 0px 13px 0px rgb(204 200 200);
+    text-align: left;
+    padding: 7px;
+}
+.dropdown-menu .dropdown-menu-option {
+    font-size: 12px;
+    margin-bottom: 0px;
+    padding: 5px;
+}
+.dropdown-menu .dropdown-menu-option:hover {
+    background-color: #f4f5fb;
+    border-radius: 5px;
+}
+.dropdown-menu #menu-option-delete form button {
+    background-color: transparent;
+    border: none;
 }

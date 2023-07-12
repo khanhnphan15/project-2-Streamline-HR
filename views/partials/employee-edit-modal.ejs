@@ -1,52 +1,53 @@
-<div id="add-employee-modal" class="modal-container">
-    <form action="/employees/create" method="POST">
+<div id="edit-employee-modal" class="modal-container">
+    <form action="/employees/update?_method=PUT" method="POST">
         <div class="modal-box">
             <div class="modal-header">
-                <h2>New Employee Details</h2>
+                <h2>Edit Employee Details</h2>
                 <a href="#" id="close-add-employee-modal" class="close-icon"></a>
             </div>
             <div class="modal-input">
                 <div class="input-container">
                     <div class="input-box">
                         <label>First Name</label>
-                        <input id="add-employee-first-name" type="text" name="firstName"/>
+                        <input id="edit-employee-first-name" type="text" name="firstName"/>
 
                     </div>
                     <div class="input-box">
                         <label>Last Name</label>
-                        <input id="add-employee-last-name" type="text" name="lastName"/>
+                        <input id="edit-employee-last-name" type="text" name="lastName"/>
                     </div>
                 </div>
                 <div class="input-box">
                     <label>Avatar URL</label>
-                    <input id="add-employee-image" type="text" name="image" placeholder="http://" />
+                    <input id="edit-employee-image" type="text" name="image" placeholder="http://" />
                 </div>
                 <div class="input-box">
                     <label>Date of Birth</label>
-                    <input id="add-employee-dob" type="date" name="dob"/>
+                    <input id="edit-employee-dob" type="date" name="dob"/>
                 </div>
 
                 <div class="input-container">
                     <div class="input-box">
                         <label>Email Address</label>
-                        <input id="add-employee-email" type="email" name="email"/>
+                        <input id="edit-employee-email" type="email" name="email"/>
                     </div>
                     <div class="input-box">
                         <label>Phone</label>
-                        <input id="add-employee-phone" type="text" name="phone"/>
+                        <input id="edit-employee-phone" type="text" name="phone"/>
                     </div>
 
                 </div>
                 <div class="input-box">
                     <label>Job-position</label>
-                    <input id="add-employee-job-position" type="text" name="position"/>
+                    <input id="edit-employee-job-position" type="text" name="position"/>
                 </div>
                 <div class="input-box">
                     <label>Date of Hire</label>
-                    <input id="add-employee-date-of-hire" type="date" name="dateOfHire"/>
+                    <input id="edit-employee-date-of-hire" type="date" name="dateOfHire"/>
                 </div>
+                <input id="edit-employee-id" type="hidden" name="_id" />
                 <div class="modal-footer">
-                    <button id="add-employee-save-button" class="add-btn" type="submit">Save</button>
+                    <button id="edit-employee-save-button" class="add-btn" type="submit">Save</button>
                 </div>
 
             </div>

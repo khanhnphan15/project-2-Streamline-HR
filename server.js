@@ -59,6 +59,8 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/employees', employeesRouter);
 
+//search bar
+app.get('/request/search', (req, res) => { console.log(req.body); res.redirect('/employees'); });
 
 // error handler
 app.use(function(err, req, res, next) {

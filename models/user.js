@@ -6,12 +6,45 @@ const userSchema = new mongoose.Schema({
 	name: String,
 	googleId: {
 	  type: String,
-	  required: true
+	  required: false
 	},
-	email: String,
+
+	firstName: {
+		type: String,
+		required: true,
+	},
+	lastName: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	email: {
+		type: String,
+		required: true
+	},
+	phone: {
+		type: String,
+		required: true
+	},
+	position: {
+		type: String,
+		required: true
+	},
+	dateOfHire: {
+		type: Date,
+		required: true
+	},
+	image:{
+		type: String,
+		required: true
+	},
+	dob: {
+		type: Date,
+		required: true
+	},
 	avatar: String
   }, {
-	timestamps: true
+	timestamps: true,
   });
 
 module.exports = mongoose.model('User', userSchema);
