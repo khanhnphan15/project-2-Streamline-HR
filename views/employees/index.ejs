@@ -1,313 +1,89 @@
-<%- include('../partials/header') %>
-<body>
-<%- include('../partials/employee-modal') %>
-<%- include('../partials/employee-edit-modal') %>
-
-<div class="page-wrapper sidebar-closed">
-    <nav class='leftNav'>
-        <div class="employeeDetail">
-            <h2>Full Detail</h2>
-            <img id="employee-detail-image" src='https://media.licdn.com/dms/image/C4D03AQFsUiQ7K7d8Eg/profile-displayphoto-shrink_200_200/0/1597245962129?e=1694649600&v=beta&t=uqK6zUdbQiT3RXe4D4d1IfYFHboelS27TwJikBeGxq4' />
-            <h3 id="employee-detail-name">Jenny Yoo</h3>
-            <p id="employee-detail-email">jenny@yahoo.com</p>
-            <p id="employee-detail-phone">770-466-7431</p>
-            <p id="employee-detail-position">Controller</p>
-            <p id="employee-detail-dob" class='date'>02/1/1990</p>
-        </div>
-    </nav>
+<%- include('../partials/header') %> <div class="page-wrapper sidebar-closed">
     <main class="mainContainer">
         <div class="mainWrapper">
-            <h1>
-                Total Employees:  <span class="employee-count"><%=employees.length%></span>
+            <h1> Total Employees: <span class="employee-count"><%= employees.length %> </span>
             </h1>
             <div class="employee-header">
                 <div class="search-container">
                     <input type="search" id="search" placeholder="Search by name, email...">
                 </div>
-                <button class="add-btn" id="add-employee-button">Add Employee</button>
-            </div>
-            <div class="employees">
-            </div>
-            <div class="grid-container">
-                <% employees.forEach((e) => { %>
-                    <div data-employee="<%= e._id %>" class="employee-panel">
-                        <div class="panel-header">
-                            <svg class="three-dot-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 24" fill="currentColor" width="24" height="15">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </div>
-
-                        <div class="profileImage">
-                            <img src=<%= e.image %> />
-                        </div>
-                        <div class="employee-detail">
-                            <h6 class="employee-name"><%= e.firstName  %> <%= e.lastName %></h6>
-                            <p class="employee-email"><%= e.email %></p>
-                        </div>
-                        <div class="position-role">
-                            <p><%= e.position %></p>
+                <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</a>
+                <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="/employees/create" method="POST">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-container">
+                                        <div class="input-box">
+                                            <label>First Name</label>
+                                            <input id="add-employee-first-name" type="text" name="firstName" />
+                                        </div>
+                                        <div class="input-box">
+                                            <label>Last Name</label>
+                                            <input id="add-employee-last-name" type="text" name="lastName" />
+                                        </div>
+                                    </div>
+                                    <div class="input-box">
+                                        <label>Avatar URL</label>
+                                        <input id="add-employee-image" type="text" name="image" placeholder="http://" />
+                                    </div>
+                                    <div class="input-box">
+                                        <label>Date of Birth</label>
+                                        <input id="add-employee-dob" type="date" name="dob" />
+                                    </div>
+                                    <div class="input-container">
+                                        <div class="input-box">
+                                            <label>Email Address</label>
+                                            <input id="add-employee-email" type="email" name="email" />
+                                        </div>
+                                        <div class="input-box">
+                                            <label>Phone</label>
+                                            <input id="add-employee-phone" type="text" name="phone" />
+                                        </div>
+                                    </div>
+                                    <div class="input-box">
+                                        <label>Job-position</label>
+                                        <input id="add-employee-job-position" type="text" name="position" />
+                                    </div>
+                                    <div class="input-box">
+                                        <label>Date of Hire</label>
+                                        <input id="add-employee-date-of-hire" type="date" name="dateOfHire" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                <% }) %>
+                </div>
             </div>
+            <div class="employees"></div>
+            <div class="grid-container"><% employees.forEach((e) => { %> <div class="employee-panel">
+                    <div class="panel-header">
+                        <svg class="three-dot-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 24" fill="currentColor" width="24" height="15">
+                            <circle cx="12" cy="5" r="2" />
+                            <circle cx="12" cy="12" r="2" />
+                            <circle cx="12" cy="19" r="2" />
+                        </svg>
+                    </div>
+                    <div class="profileImage">
+                        <img src=<%= e.image %> />
+                    </div>
+                    <div class="employee-detail">
+                        <h6 class="employee-name">
+                            <a href="/employees/<%= e._id %>"><%= e.firstName %><%= e.lastName %> </a>
+                        </h6>
+                        <p class="employee-email"><%= e.email %> </p>
+                    </div>
+                    <div class="position-role">
+                        <p><%= e.position %> </p>
+                    </div>
+                </div><% }) %> </div>
         </div>
     </main>
-</div>
-<script type="text/javascript">
-    const employees = <%- JSON.stringify(employees) %>
-    const pageWrapper = document.querySelector('.page-wrapper');
-    const addEmployeeButton = document.getElementById('add-employee-button');
-    const closeAddEmployeeButton = document.getElementById('close-add-employee-modal');
-    const addEmployeeModalSaveButton = document.getElementById('add-employee-save-button');
-    const editEmployeeModalSaveButton = document.getElementById('edit-employee-save-button');
-    const threeDotButtons = document.querySelectorAll('.three-dot-button');
-    const profileImages = document.querySelectorAll('.profileImage');
-
-    const employeeSidebarImage = document.getElementById('employee-detail-image');
-    const employeeSidebarName = document.getElementById('employee-detail-name');
-    const employeeSidebarEmail = document.getElementById('employee-detail-email');
-    const employeeSidebarPhone = document.getElementById('employee-detail-phone');
-    const employeeSidebarPosition = document.getElementById('employee-detail-position');
-    const employeeSidebarDob = document.getElementById('employee-detail-dob');
-
-    const addEmployeeModal = document.getElementById('add-employee-modal');
-    const addEmployeeFirstName = document.getElementById('add-employee-first-name');
-    const addEmployeeLastName = document.getElementById('add-employee-last-name');
-    const addEmployeeImage = document.getElementById('add-employee-image');
-    const addEmployeeDob = document.getElementById('add-employee-dob');
-    const addEmployeeEmail = document.getElementById('add-employee-email');
-    const addEmployeePhone = document.getElementById('add-employee-phone');
-    const addEmployeePosition = document.getElementById('add-employee-job-position');
-    const addEmployeeDateOfHire = document.getElementById('add-employee-date-of-hire');
-
-    const editEmployeeModal = document.getElementById('edit-employee-modal');
-    const editEmployeeId = document.getElementById('edit-employee-id');
-    const editEmployeeFirstName = document.getElementById('edit-employee-first-name');
-    const editEmployeeLastName = document.getElementById('edit-employee-last-name');
-    const editEmployeeImage = document.getElementById('edit-employee-image');
-    const editEmployeeDob = document.getElementById('edit-employee-dob');
-    const editEmployeeEmail = document.getElementById('edit-employee-email');
-    const editEmployeePhone = document.getElementById('edit-employee-phone');
-    const editEmployeePosition = document.getElementById('edit-employee-job-position');
-    const editEmployeeDateOfHire = document.getElementById('edit-employee-date-of-hire');
-
-    class FormInput {
-        name;
-        input;
-        validators;
-        isValid = true;
-        errors = [];
-
-        constructor(args) {
-            this.name = args.name;
-            this.input = args.input;
-            this.validators = args.validators;
-        }
-    }
-
-    let addInputs = [
-        new FormInput({
-            name: 'firstName',
-            label: 'First Name',
-            input: addEmployeeFirstName,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'lastName',
-            label: 'Last Name',
-            input: addEmployeeLastName,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'image',
-            label: 'Avatar URL',
-            input: addEmployeeImage,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'dob',
-            label: 'Dob',
-            input: addEmployeeDob,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'email',
-            label: 'Email',
-            input: addEmployeeEmail,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'phone',
-            label: 'Phone',
-            input: addEmployeePhone,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'position',
-            label: 'Job Position',
-            input: addEmployeePosition,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'dateOfHiring',
-            label: 'Date of Hire',
-            input: addEmployeeDateOfHire,
-            validators: ['populated'],
-        }),
-    ];
-
-    let editInputs = [
-        new FormInput({
-            name: 'firstName',
-            label: 'First Name',
-            input: editEmployeeFirstName,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'lastName',
-            label: 'Last Name',
-            input: editEmployeeLastName,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'image',
-            label: 'Avatar URL',
-            input: editEmployeeImage,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'dob',
-            label: 'Dob',
-            input: editEmployeeDob,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'email',
-            label: 'Email',
-            input: editEmployeeEmail,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'phone',
-            label: 'Phone',
-            input: editEmployeePhone,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'position',
-            label: 'Job Position',
-            input: editEmployeePosition,
-            validators: ['populated'],
-        }),
-        new FormInput({
-            name: 'dateOfHiring',
-            label: 'Date of Hire',
-            input: editEmployeeDateOfHire,
-            validators: ['populated'],
-        }),
-    ]
-
-    addEmployeeButton.addEventListener('click', (btn) => {
-        addEmployeeModal.classList.add('show');
-    });
-    closeAddEmployeeButton.addEventListener('click', (btn) => {
-        addEmployeeModal.classList.remove('show');
-    });
-
-    for (let i of threeDotButtons) {
-        i.addEventListener('click', (evt) => {
-            let btn = evt.target;
-            let container = document.createElement('div');
-            container.classList.add('dropdown-menu');
-            container.id = 'dropdown-menu';
-            container.innerHTML =
-                `<div id="menu-option-edit" class="dropdown-menu-option"><span>Edit</span></div>
-                 <div id="menu-option-delete" class="dropdown-menu-option"><span>Delete</span></div>`;
-            btn.parentNode.insertBefore(container, btn.nextSibling);
-            let editOption = document.getElementById('menu-option-edit');
-            let deleteOption = document.getElementById('menu-option-delete');
-            editOption.addEventListener('click', (evt) => {
-                let menuOption = evt.target;
-                let employeeId = menuOption.parentNode.parentNode.parentNode.getAttribute('data-employee');
-                if (!employeeId) {
-                    throw new Error(`No employee id found in edit handler`);
-                }
-                let employee = employees.find(i => i._id === employeeId);
-                editEmployeeModal.classList.add('show');
-                for (let i of editInputs) {
-                    i.input.value = employee[i.name];
-                }
-                editEmployeeId.value = employee._id;
-            });
-            deleteOption.addEventListener('click', (evt) => {
-                let menuOption = evt.target;
-                let employeeId = menuOption.parentNode.parentNode.parentNode.getAttribute('data-employee');
-                if (!employeeId) {
-                    throw new Error(`No employee id found in edit handler`);
-                }
-                document.body.insertAdjacentHTML('beforeend', `
-                <form style="visibility: hidden; position: absolute;" id='temp-form' action="/employees/delete/?_method=DELETE&id=${employeeId}" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
-                `);
-                let hiddenForm = document.getElementById('temp-form');
-                hiddenForm.submit();
-                document.removeChild(hiddenForm);
-            });
-        });
-    }
-    for (let i of profileImages) {
-        i.addEventListener('click', (evt) => {
-            let employeePanel = evt.target;
-            pageWrapper.classList.add('sidebar-open');
-            pageWrapper.classList.remove('sidebar-closed');
-            let employeeId = employeePanel.parentNode.parentNode.getAttribute('data-employee');
-            let employee = employees.find(i => i._id === employeeId);
-
-            employeeSidebarImage.src = employee.image;
-            employeeSidebarName.textContent = `${employee.firstName} ${employee.lastName}`;
-            employeeSidebarEmail.textContent = employee.email;
-            employeeSidebarPhone.textContent = employee.phone;
-            employeeSidebarPosition.textContent = employee.dateOfHire;
-            employeeSidebarDob.newdate = employee.dob;
-        });
-    }
-
-    function deleteErrorMessage(i) {
-        if (i.input.nextSibling.nodeName === 'SPAN' && i.input.nextSibling.classList.contains('validation-error')) {
-            i.input.parentNode.removeChild(i.input.nextSibling);
-        }
-    }
-
-    function validateForm() {
-        let formIsValid = true;
-        for (let i of addInputs) {
-            for (let v of i.validators) {
-                switch (v) {
-                    case 'populated':
-                        let isValid = isPopulated(i.input);
-                        if (!isValid) {
-                            formIsValid = false;
-                            i.isValid = false;
-                            i.errors.push(`${i.label} must be populated`);
-                        } else {
-                            i.isValid = true;
-                        }
-                        break;
-
-                    default:
-                        throw new Error(`${v} is not a valid option in validateForm`);
-                }
-            }
-        }
-        return formIsValid;
-    }
-    function isPopulated(input) {
-        return !!input.value;
-    }
-</script>
-</body>
-
-<%- include('../partials/footer') %>
+</div><%- include('../partials/footer') %>

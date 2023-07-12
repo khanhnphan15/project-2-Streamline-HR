@@ -2,8 +2,10 @@ const userModel = require("../models/user");
 
 module.exports = {
     index,
-    create: createEmployee,
+    show: showEmployee,
+    edit: editEmployee,
     update: updateEmployee,
+    create: createEmployee,
     delete: deleteEmployee,
 };
 
@@ -11,6 +13,31 @@ async function index(req, res) {
     const employees = await userModel.find({});
     console.log(employees);
     res.render("employees/index", {title: "All Employees", employees });
+}
+
+async function showEmployee(req, res) {
+    const employee = await userModel.findOne({ _id: req.params.id });
+    res.render("employees/show", {
+        title: `${employee.firstName} ${employee.lastName}`,
+        employee
+    });
+}
+
+async function editEmployee(req, res) {
+    const employee = await userModel.findOne({ _id: req.params.id });
+    res.render("employees/edit", {
+        title: `${employee.firstName} ${employee.lastName}`,
+        employee
+    });
+}
+
+async function updateEmployee(req, res) {
+    try {
+        await userModel.updateOne({ _id: req.params.id }, req.body);
+        res.redirect(`/employees/${req.params.id}`)
+    } catch (err) {
+
+    }
 }
 
 async function createEmployee(req, res) {
@@ -24,28 +51,9 @@ async function createEmployee(req, res) {
     }
 }
 
-async function updateEmployee(req, res) {
-    try {
-        const employee = await userModel.findOneAndUpdate(
-            {_id: req.body._id},
-            req.body,
-            // If `new` isn't true, `findOneAndUpdate()` will return the
-            // document as it was _before_ it was updated.
-            { new: true }
-        );
-        if (!employee) {
-            res.redirect('/employees/');
-        }
-        res.redirect('/employees/');
-    } catch (err) {
-        debugger
-    }
-}
-
-
 async function deleteEmployee(req, res) {
     try {
-        let employeeId = req.query.id;
+        let employeeId = req.params.id;
         if (!employeeId || employeeId === 'null') {
             throw new Error(`'id' must be included as a query param`);
         } else {

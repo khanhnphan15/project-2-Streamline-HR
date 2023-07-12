@@ -1,0 +1,92 @@
+<%- include('../partials/header') %> <div class="container rounded bg-white mt-5 mb-5">
+    <style type="text/css">
+        body {
+            background-color: #f7f7f7;
+        }
+        input {
+            background-color: #f7f7f7 !important;
+            border: 1px solid #f7f7f7 !important;
+        }
+        .container {
+            background-color: #f7f7f7 !important;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="<%= employee.image %>">
+                <span class="font-weight-bold"><%= employee.firstName%> <%= employee.lastName %></span>
+                <span class="text-black-50"><%= employee.email %></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Employee Details</h4>
+                    <div>
+                        <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a>
+                        <a href="/employees/<%= employee.id %>/edit" class="btn btn-primary" role="button">Edit</a>
+
+                        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="/employees/<%= employee.id %>/delete?_method=DELETE" method="POST">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this employee?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Position</label>
+                        <input disabled type="text" class="form-control" placeholder="enter email id" value="<%= employee.position %>">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="labels">Mobile Number</label>
+                        <input disabled type="text" class="form-control" placeholder="enter phone number" value="<%= employee.phone %>">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="labels">Date of Birth</label>
+                        <input disabled type="text" class="form-control" placeholder="" value="<%= employee.dob %>">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="labels">Date of Hire</label>
+                        <input disabled type="text" class="form-control" placeholder="" value="<%= employee.dateOfHire %>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience">
+                    <span>Edit Experience</span>
+                    <span class="border px-3 p-1 add-experience">
+            <i class="fa fa-plus"></i>&nbsp;Experience </span>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <label class="labels">Experience in Designing</label>
+                    <input type="text" class="form-control" placeholder="experience" value="">
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <label class="labels">Additional Details</label>
+                    <input type="text" class="form-control" placeholder="additional details" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer') %>

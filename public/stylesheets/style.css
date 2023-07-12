@@ -1,6 +1,4 @@
 body {
-    height: 100vh;
-    overflow: hidden;
     font-family: arial, sans-serif;
 }
 
@@ -215,7 +213,6 @@ body {
     grid-template-columns: auto auto auto auto;
     grid-gap: 15px;
     transition: 0.3s ease-in-out;
-    cursor: pointer;
     overflow: hidden;
 }
 
@@ -252,6 +249,10 @@ body {
 .employee-panel .employee-detail .employee-name {
     font-size: 12px;
     margin-bottom: 5px;
+}
+.employee-panel .employee-detail .employee-name a {
+    text-decoration: none;
+    color: #5b5ba6;
 }
 .employee-panel .employee-detail .employee-email {
     font-size: 9px;

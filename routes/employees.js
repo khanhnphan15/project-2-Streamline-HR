@@ -5,11 +5,10 @@ const employeesCtrl = require('../controllers/employees');
 
 // GET /employees
 router.get('/', employeesCtrl.index);
-//GET /employees/new
-// router.get('/new', employeesCtrl.new);
-//POST/
+router.get('/:id', employeesCtrl.show);
+router.get('/:id/edit', employeesCtrl.edit);
+router.put('/:id/update', employeesCtrl.update);
 router.post('/create', employeesCtrl.create);
-router.put('/update', employeesCtrl.update);
-router.delete('/delete', employeesCtrl.delete);
+router.delete('/:id/delete', employeesCtrl.delete);
 
 module.exports = router;
