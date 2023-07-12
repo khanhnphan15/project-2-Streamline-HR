@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-5 border-right">
-            <form action="/employees/<%= employee.id %>/update?_method=PUT" method="POST">
+            <form action="/employees/<%= employee.id %>?_method=PUT" method="POST">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Edit Employee</h4>
@@ -53,31 +53,16 @@
                             <input type="date" class="form-control" name="dob" placeholder="Date of Birth" value="<%= employee.dob %>">
                         </div>
                         <div class="col-md-12">
+                            <label class="labels">Position</label>
+                            <input type="text" class="form-control" name="position" placeholder="Position" value="<%= employee.position %>">
+                        </div>
+                        <div class="col-md-12">
                             <label class="labels">Date of Hire</label>
                             <input type="date" class="form-control" name="dateOfHire" placeholder="Date of Hire" value="<%= employee.dateOfHire %>">
                         </div>
                     </div>
                 </div>
             </form>
-        </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience">
-                    <span>Edit Experience</span>
-                    <span class="border px-3 p-1 add-experience">
-            <i class="fa fa-plus"></i>&nbsp;Experience </span>
-                </div>
-                <br>
-                <div class="col-md-12">
-                    <label class="labels">Experience in Designing</label>
-                    <input type="text" class="form-control" placeholder="experience" value="">
-                </div>
-                <br>
-                <div class="col-md-12">
-                    <label class="labels">Additional Details</label>
-                    <input type="text" class="form-control" placeholder="additional details" value="">
-                </div>
-            </div>
         </div>
     </div>
 </div>

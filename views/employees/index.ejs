@@ -1,17 +1,17 @@
 <%- include('../partials/header') %> <div class="page-wrapper sidebar-closed">
     <main class="mainContainer">
         <div class="mainWrapper">
-            <h1> Total Employees: <span class="employee-count"><%= employees.length %> </span>
-            </h1>
+            <h3> Total Employees: <span class="employee-count"><%= employees.length %> </span>
+            </h3>
             <div class="employee-header">
                 <div class="search-container">
-                    <input type="search" id="search" placeholder="Search by name, email...">
+                    <input type="search" id="search" placeholder="Search by name, email..." value="<%= q %>">
                 </div>
                 <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</a>
                 <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="/employees/create" method="POST">
+                            <form action="/employees/" method="POST">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                     <div class="input-box">
-                                        <label>Avatar URL</label>
+                                        <label>Image URL</label>
                                         <input id="add-employee-image" type="text" name="image" placeholder="http://" />
                                     </div>
                                     <div class="input-box">
@@ -76,7 +76,7 @@
                     </div>
                     <div class="employee-detail">
                         <h6 class="employee-name">
-                            <a href="/employees/<%= e._id %>"><%= e.firstName %><%= e.lastName %> </a>
+                            <a href="/employees/<%= e._id %>"><%= e.firstName %> <%= e.lastName %> </a>
                         </h6>
                         <p class="employee-email"><%= e.email %> </p>
                     </div>
@@ -86,4 +86,15 @@
                 </div><% }) %> </div>
         </div>
     </main>
-</div><%- include('../partials/footer') %>
+</div>
+<script type="text/javascript">
+    let search = document.getElementById('search');
+    let typingTimeout;
+    search.addEventListener('input', (evt) => {
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+            window.location.href = `/employees?q=${evt.target.value}`;
+        }, 600);
+    });
+</script>
+<%- include('../partials/footer') %>

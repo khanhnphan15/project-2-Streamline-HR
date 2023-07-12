@@ -13,7 +13,7 @@ async function index(req, res) {
         _id: 1,
         firstName: 'Joe',
         lastName: 'Smith',
-        dob: '02/15/1987',
+        dob: '02/10/1957',
         email: 'lsj@slgj.com',
         phone: '235-235-2356',
         position: 'CEO',

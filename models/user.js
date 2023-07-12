@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
 	name: String,
+	roles:  [{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}],
 	googleId: {
 	  type: String,
 	  required: false
 	},
-
 	firstName: {
 		type: String,
 		required: true,

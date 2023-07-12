@@ -31,7 +31,7 @@
                         <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="/employees/<%= employee.id %>/delete?_method=DELETE" method="POST">
+                                    <form action="/employees/<%= employee.id %>?_method=DELETE" method="POST">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -62,8 +62,8 @@
                         <input disabled type="text" class="form-control" placeholder="" value="<%= employee.dob %>">
                     </div>
                     <div class="col-md-12">
-                        <label class="labels">Date of Hire</label>
-                        <input disabled type="text" class="form-control" placeholder="" value="<%= employee.dateOfHire %>">
+                        <label class="labels">Position</label>
+                        <input disabled type="text" class="form-control" placeholder="" value="<%= employee.position %>">
                     </div>
                 </div>
             </div>
@@ -87,6 +87,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <%- include('../partials/footer') %>
