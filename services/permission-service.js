@@ -1,4 +1,6 @@
 const userModel = require('../models/user');
+const roleModel = require('../models/role');
+const permissionModel = require('../models/permission');
 
 const checkPermissions = async function (permissionName, userId) {
     try {
@@ -22,15 +24,21 @@ const checkPermissions = async function (permissionName, userId) {
             ]
         }, []);
 
-        if (!permissions.includes(permissionName)) {
-            throw new Error(`User does not have permission to perform this action`);
+        if (Array.isArray(permissionName)) {
+            if (!permissionName.every(pn => permissions.includes(pn))) {
+                throw new Error(`User does not have permission to perform this action`);
+            }
+        } else {
+            if (!permissions.includes(permissionName)) {
+                throw new Error(`User does not have permission to perform this action`);
+            }
         }
     } catch (err) {
         console.error(err);
     }
 }
 
-const checkPermissionError = function(err, res) {
+const checkPermissionError = function (err, res) {
     if (err.message === 'User does not have permission to perform this action') {
         res.send(401);
     }

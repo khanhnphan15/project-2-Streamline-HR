@@ -7,7 +7,6 @@ const roleSchema = new mongoose.Schema({
         required: true
     },
     permissions:  [{type: mongoose.Schema.Types.ObjectId, ref: 'Permission'}],
-    // roles:{type: mongoose.Schema.Types.ObjectId, ref: 'Role'},
 })
 
 module.exports = mongoose.model("Role", roleSchema)

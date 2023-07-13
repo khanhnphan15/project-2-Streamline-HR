@@ -1,0 +1,39 @@
+<%- include('../partials/header') %> <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right"></div>
+        <div class="col-md-5 border-right">
+            <form action="/dependents/<%= dependent.id %>?_method=PUT" method="POST">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Edit Dependent</h4>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">First Name</label>
+                            <input type="text" class="form-control" name="firstName" placeholder="First Name" value="<%= dependent.firstName %>">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Last Name</label>
+                            <input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<%= dependent.lastName %>">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Email</label>
+                            <input type="text" class="form-control" name="email" placeholder="Email" value="<%= dependent.email %>">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Phone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Phone" value="<%= dependent.phone %>">
+                        </div>
+                        <div class="col-md-12" style="margin-top: 15px;">
+                            <div class="row">
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<%- include('../partials/footer') %>

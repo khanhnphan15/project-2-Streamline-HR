@@ -28,8 +28,6 @@ async function index(req, res) {
 
 function newEmployee(req, res) {
     res.render('employees/new', {title: 'Create New Employee'})
-
-
     function newEmployee(req, res) {
         // We'll want to be able to render an
         // errorMsg if the create action fails

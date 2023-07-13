@@ -1,4 +1,5 @@
 const userModel = require("../models/user");
+const dependentModel = require("../models/dependent");
 const {checkPermissions, checkPermissionError} = require("../services/permission-service");
 
 module.exports = {
@@ -12,7 +13,8 @@ module.exports = {
 
 async function index(req, res) {
     try {
-        await checkPermissions('can_read_employees', '64a7110ad84a82467b062891');
+        debugger
+        await checkPermissions('can_read_employees', '64b004edbde2dd5b8c4a32ef');
         const employees = await userModel.find({});
         let q = req.query.q;
         if (q) {
@@ -30,11 +32,13 @@ async function index(req, res) {
 
 async function showEmployee(req, res) {
     try {
-        await checkPermissions('can_read_employees', '64a7110ad84a82467b062891');
+        await checkPermissions(['can_read_employees', 'can_read_dependents'], '64b004edbde2dd5b8c4a32ef');
         const employee = await userModel.findOne({_id: req.params.id});
+        const dependents = await dependentModel.find({ user: req.params.id });
         res.render("employees/show", {
             title: `${employee.firstName} ${employee.lastName}`,
-            employee
+            employee,
+            dependents,
         });
     } catch (err) {
         checkPermissionError(err, res);
@@ -43,7 +47,7 @@ async function showEmployee(req, res) {
 
 async function editEmployee(req, res) {
     try {
-        await checkPermissions('can_update_employees', '64a7110ad84a82467b062891');
+        await checkPermissions('can_update_employees', '64b004edbde2dd5b8c4a32ef');
         const employee = await userModel.findOne({_id: req.params.id});
         res.render("employees/edit", {
             title: `${employee.firstName} ${employee.lastName}`,
@@ -56,7 +60,7 @@ async function editEmployee(req, res) {
 
 async function updateEmployee(req, res) {
     try {
-        await checkPermissions('can_update_employees', '64a7110ad84a82467b062891');
+        await checkPermissions('can_update_employees', '64b004edbde2dd5b8c4a32ef');
         await userModel.updateOne({_id: req.params.id}, req.body);
         res.redirect(`/employees/${req.params.id}`)
     } catch (err) {
@@ -66,7 +70,7 @@ async function updateEmployee(req, res) {
 
 async function createEmployee(req, res) {
     try {
-        await checkPermissions('can_create_employees', '64a7110ad84a82467b062891');
+        await checkPermissions('can_create_employees', '64b004edbde2dd5b8c4a32ef');
         const newUser = await userModel.create(req.body);
         console.log(newUser);
         res.redirect(`/employees/`);
@@ -78,7 +82,7 @@ async function createEmployee(req, res) {
 
 async function deleteEmployee(req, res) {
     try {
-        await checkPermissions('can_delete_employees', '64a7110ad84a82467b062891');
+        await checkPermissions('can_delete_employees', '64b004edbde2dd5b8c4a32ef');
         let employeeId = req.params.id;
         if (!employeeId || employeeId === 'null') {
             throw new Error(`'id' must be included as a query param`);

@@ -14,6 +14,7 @@ const indexRoutes = require('./routes/index');
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const employeesRouter = require('./routes/employees');
+const dependentsRouter = require('./routes/dependents');
 
 
 const app = express();
@@ -22,8 +23,6 @@ const app = express();
 require('./config/database');
 // configure Passport
 require('./config/passport');
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,6 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/employees', employeesRouter);
+app.use('/dependents', dependentsRouter);
 
 //search bar
 app.get('/request/search', (req, res) => { console.log(req.body); res.redirect('/employees'); });
