@@ -34,5 +34,5 @@ Trello Board: (Link here)[https://trello.com/b/OmPwM2NP/streamline-hr]
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+- Future enhancement one: Try to work on Login by username/password.
+- Future enhancement two: Try to create an Admin UI for Permissions and Roles.

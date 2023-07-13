@@ -11,7 +11,7 @@ module.exports = {
 
 async function showDependent(req, res) {
     try {
-        await checkPermissions('can_read_dependents', '64b004edbde2dd5b8c4a32ef');
+        await checkPermissions('can_read_dependents', req.user._id);
         const dependent = await dependentModel.findOne({_id: req.params.id});
         res.render("dependents/show", {
             title: `${dependent.firstName} ${dependent.lastName}`,
@@ -24,7 +24,7 @@ async function showDependent(req, res) {
 
 async function editDependent(req, res) {
     try {
-        await checkPermissions('can_update_dependents', '64b004edbde2dd5b8c4a32ef');
+        await checkPermissions('can_update_dependents', req.user._id);
         const dependent = await dependentModel.findOne({_id: req.params.id});
         res.render("dependents/edit", {
             title: `${dependent.firstName} ${dependent.lastName}`,
@@ -37,7 +37,7 @@ async function editDependent(req, res) {
 
 async function updateDependent(req, res) {
     try {
-        await checkPermissions('can_update_dependents', '64b004edbde2dd5b8c4a32ef');
+        await checkPermissions('can_update_dependents', req.user._id);
         debugger
         let dependent = await dependentModel.findOneAndUpdate({_id: req.params.id}, req.body, { new: true }).populate('user').exec();
         res.redirect(`/employees/${dependent.user.id}`)
@@ -48,7 +48,7 @@ async function updateDependent(req, res) {
 
 async function createDependent(req, res) {
     try {
-        await checkPermissions('can_create_dependents', '64b004edbde2dd5b8c4a32ef');
+        await checkPermissions('can_create_dependents', req.user._id);
         debugger
         const newDependent = await dependentModel.create(req.body);
         res.redirect(`/employees/${req.body.user}`);
@@ -60,7 +60,7 @@ async function createDependent(req, res) {
 
 async function deleteDependent(req, res) {
     try {
-        await checkPermissions('can_delete_dependents', '64b004edbde2dd5b8c4a32ef');
+        await checkPermissions('can_delete_dependents', req.user._id);
         let dependentId = req.params.id;
         let dependent = await dependentModel.findOne({ _id: req.params.id }).populate('user').exec();
         if (!dependentId || dependentId === 'null') {
