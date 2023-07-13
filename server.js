@@ -1,4 +1,4 @@
-// load the env consts
+const createError = require('http-errors');
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -9,7 +9,7 @@ const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override');
 const indexRoutes = require('./routes/index');
-
+const MongoStore = require('connect-mongo');
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
@@ -37,6 +37,9 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 
 app.use(session({
+  store: MongoStore.create({
+    mongoUrl: process.env.DATABASE_URL
+  }),
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true
