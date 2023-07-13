@@ -1,5 +1,5 @@
 
-# Treamline HR
+# Streamline HR
 
 An Employee Management System application is a comprehensive app used to collect, organize, and retain employee data in an organization. In the application, employee details are collected and stored in the data. Streamline HR simply provides data on employees'profiles includes name, email, DOB, position, recruitment, performance management (roles, permission) and related benefits( dependents).
 
