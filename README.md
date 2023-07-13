@@ -28,9 +28,9 @@ An Employee Management System application is a comprehensive app used to collect
 
 # Getting Started
 
-Trello Board: (Link here)[https://trello.com/b/OmPwM2NP/streamline-hr]
+Trello Board: [Link here](https://trello.com/b/OmPwM2NP/streamline-hr)
 
-[Click to Play Connect Four!](your deployment url here)
+[Streamline-HR](https://antelope-coveralls.cyclic.app/employees/64ae3bfd262daf361303ae65)
 
 # Next Steps
 
