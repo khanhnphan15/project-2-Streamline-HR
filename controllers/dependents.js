@@ -38,7 +38,6 @@ async function editDependent(req, res) {
 async function updateDependent(req, res) {
     try {
         await checkPermissions('can_update_dependents', req.user._id);
-        debugger
         let dependent = await dependentModel.findOneAndUpdate({_id: req.params.id}, req.body, { new: true }).populate('user').exec();
         res.redirect(`/employees/${dependent.user.id}`)
     } catch (err) {

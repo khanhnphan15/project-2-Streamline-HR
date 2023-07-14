@@ -76,7 +76,7 @@ async function createEmployee(req, res) {
         res.redirect(`/employees/`);
     } catch (err) {
         checkPermissionError(err, res);
-        res.render("employees/new", {errorMsg: err.message});
+        res.render("/employees/", {errorMsg: err.message});
     }
 }
 
