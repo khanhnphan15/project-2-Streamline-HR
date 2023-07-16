@@ -24,12 +24,18 @@ passport.use(new GoogleStrategy({
                 // if its the users first time loggin in, we need to create a user document and store them in our database, and then pass the user information
                 // along in our middleware chain
 
+                // split the name on a space and try to derive first and last name
+                let nameEls = profile.displayName.split(' ');
+                let firstName = nameEls[0];
+                let lastName = nameEls.slice(1).join(' ');
+
                 // first time logging in! Create the user!
                 userDocument = await UserModel.create({
-                    name: profile.displayName,
+                    firstName,
+                    lastName,
                     googleId: profile.id,
                     email: profile.emails[0].value,
-                    avatar: profile.photos[0].value,
+                    image: profile.photos[0].value,
                 });
                 // pass the created users information to the next function in the middleware chain
                 return cb(null, userDocument);

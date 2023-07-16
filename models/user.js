@@ -23,25 +23,24 @@ const userSchema = new mongoose.Schema({
 	},
 	phone: {
 		type: String,
-		required: true
+		// required: true
 	},
 	position: {
 		type: String,
-		required: true
+		// required: true
 	},
 	dateOfHire: {
 		type: Date,
-		required: true
+		// required: true
 	},
 	image:{
 		type: String,
-		required: true
+		// required: true
 	},
 	dob: {
 		type: Date,
-		required: true
+		// required: true
 	},
-	avatar: String
   }, {
 	timestamps: true,
   });
